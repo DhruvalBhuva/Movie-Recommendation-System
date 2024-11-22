@@ -1,0 +1,47 @@
+Types of Recommendation system:
+  - Content based recommendation systems.
+
+  - Collaborative filtering (CF) recommender systems, which are a subclass of content
+  - based recommenders that make recommendations to users by collecting preferences or taste information from many users and based recommenders that use the user’s past behavior to predict what items they will like in the future.
+
+  - Hybrid Approch is combining the two types of recommenders to create hybrid models that combine both approaches.
+
+Project Flow: 1- Data Collection
+  2- Preprocessing
+  3- Model Training and Evaluation
+  4- Deployment
+
+Logic:
+  - We create a tags from Overview, keywords, cast, crew.
+  - Using that tags, create a vector using bag of words technique (Text to vector).
+    ( - We extract 5000 most common name, and assign W1 to W5000. and create a matrix for that each word frequency in perticalur movie. Matrix would be M4806 * W5000.
+    - We are not considering stop words, which are "a, an, the, to, is, are....., which are used to form a sentences"
+    - Now, each row is a vector for that movie
+    )
+  - Recommend closest vector as recommendation by calculating cosin distance (For the huge dimention Eucludiean distance is not reliable)
+  -
+
+Bag of Words:
+  - Bag of word is the most common way for text data representation in machine learning. It represents each document by its unique set of features. In this case we will represent each movie by its tag list.
+
+
+Deploments:
+  1. create procfile :=
+   > web: sh setup.sh && streamlit run app.py
+   
+  2. create setup.sh file :=
+   > mkdir -p ~/.streamlit/
+
+   > echo "\
+   > [server]\n\
+   > port = $PORT\n\
+   > enableCORS=false\n\
+   > headless = true\n\
+   > \n\
+   > " >> ~/.streamlit/config.toml
+
+  3. git ignore
+  > venv
+
+  4. run command on terminal to create file of required libary
+  > pip freeze > requirements.txt
